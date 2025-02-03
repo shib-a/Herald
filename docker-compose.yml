@@ -1,0 +1,25 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    hostname: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: "rmuser"
+      RABBITMQ_DEFAULT_PASS: "rmpassword"
+    volumes:
+      - ./rabbitmq-data:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: "pdb"
+      POSTGRES_USER: "pguser"
+      POSTGRES_PASSWORD:  "pgpassword"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - 5433:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data

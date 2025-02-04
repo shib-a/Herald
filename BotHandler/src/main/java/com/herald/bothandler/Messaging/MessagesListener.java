@@ -1,5 +1,6 @@
 package com.herald.bothandler.Messaging;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.herald.bothandler.Messaging.Transfer.MessageFromBots;
 import com.herald.bothandler.Messaging.Transfer.MessageFromService;
@@ -22,15 +23,15 @@ public class MessagesListener {
     private final ObjectMapper objectMapper;
 
     @RabbitListener(queues = "${app.rabbitmq.from_bots_queue}")
-    public void receiveMessageFromBots(String message) {
-        MessageFromBots msg = objectMapper.convertValue(message, MessageFromBots.class);
+    public void receiveMessageFromBots(String message) throws JsonProcessingException {
+        MessageFromBots msg = objectMapper.readValue(message, MessageFromBots.class);
         System.out.println("Received message from bot: " + msg);
         messageService.send_to_service(new MessageToService(msg.social(), msg.user_id(), "ping-pong", msg.content(), null, null, null, null));
     }
 
     @RabbitListener(queues = "${app.rabbitmq.from_service_queue}")
-    public void receiveMessageFromService(String message) {
-        MessageFromService msg = objectMapper.convertValue(message, MessageFromService.class);
+    public void receiveMessageFromService(String message) throws JsonProcessingException {
+        MessageFromService msg = objectMapper.readValue(message, MessageFromService.class);
         System.out.println("Received message from service: " + msg);
         messageService.send_to_bots(new MessageToBots(msg.social(), msg.user_id(), msg.content()));
     }

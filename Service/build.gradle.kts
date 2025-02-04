@@ -26,8 +26,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("com.fasterxml.jackson.core:jackson-core:2.18.2")
-	implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")

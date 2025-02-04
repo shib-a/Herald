@@ -1,25 +1,19 @@
 services:
   rabbitmq:
-    image: rabbitmq:management-alpine
+    image: rabbitmq:4.0.5-management-alpine
     hostname: rabbitmq
     restart: always
-    environment:
-      RABBITMQ_DEFAULT_USER: "rmuser"
-      RABBITMQ_DEFAULT_PASS: "rmpassword"
+    env_file: "vars_rabbitmq.env"      
     volumes:
       - ./rabbitmq-data:/var/lib/rabbitmq
     ports:
       - 15672:15672
       - 5672:5672
   postgres:
-    image: postgres:latest
+    image: postgres:17.2
     restart: always
     hostname: postgres
-    environment:
-      POSTGRES_DB: "pdb"
-      POSTGRES_USER: "pguser"
-      POSTGRES_PASSWORD:  "pgpassword"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+    env_file: "vars_postgres.env"
     ports:
       - 5433:5432
     volumes:
@@ -33,4 +27,15 @@ services:
     depends_on:
       - postgres
       - rabbitmq
-    env_file: "vars.env"
+    env_file: "vars_spring.env"
+  service:
+    build:
+      context: /Service/
+      dockerfile: Dockerfile
+    image: service
+    restart: always
+    depends_on:
+      - postgres
+      - rabbitmq
+      - bot_handler
+    env_file: "vars_spring.env"

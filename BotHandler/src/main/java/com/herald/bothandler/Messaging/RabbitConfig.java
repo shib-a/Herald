@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 @Configuration
-public class RabbitConfig
-{
+public class RabbitConfig {
     @Value("${app.rabbitmq.to_service_queue}")
     private String toServiceQueue;
 
@@ -26,28 +25,33 @@ public class RabbitConfig
     private String fromServiceQueue;
 
     @Bean
-    public Queue queueToService(){
-        return new Queue(toServiceQueue, true,false,false);
+    public Queue queueToService() {
+        return new Queue(toServiceQueue, true, false, false);
     }
+
     @Bean
-    public Exchange exchangeToBots(){
-        return new HeadersExchange(toBotsExchange,true,false);
+    public Exchange exchangeToBots() {
+        return new HeadersExchange(toBotsExchange, true, false);
     }
+
     @Bean
-    public Queue queueToBotsTelegram(){
-        return new Queue(toBotsQueueTelegram,true,false,false);
+    public Queue queueToBotsTelegram() {
+        return new Queue(toBotsQueueTelegram, true, false, false);
     }
+
     @Bean
-    public Queue queueFromBots(){
-        return new Queue(fromBotsQueue,true,false,false);
+    public Queue queueFromBots() {
+        return new Queue(fromBotsQueue, true, false, false);
     }
+
     @Bean
-    public Queue queueFromService(){
-        return new Queue(fromServiceQueue,true,false,false);
+    public Queue queueFromService() {
+        return new Queue(fromServiceQueue, true, false, false);
     }
+
     @Bean
-    public Binding queueToBotsTelegramBinding(Exchange exchangeToBots, Queue queueToBotsTelegram){
-        var params = new HashMap<String,Object>();
+    public Binding queueToBotsTelegramBinding(Exchange exchangeToBots, Queue queueToBotsTelegram) {
+        var params = new HashMap<String, Object>();
         params.put("x-match", "all");
         params.put("social", "telegram");
         return BindingBuilder.bind(queueToBotsTelegram).to(exchangeToBots).with("").and(params);

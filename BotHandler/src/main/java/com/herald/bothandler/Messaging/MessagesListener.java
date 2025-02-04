@@ -25,19 +25,22 @@ public class MessagesListener {
     public void receiveMessageFromBots(String message) {
         MessageFromBots msg = objectMapper.convertValue(message, MessageFromBots.class);
         System.out.println("Received message from bot: " + msg);
-        messageService.send_to_service(new MessageToService(msg.social(), msg.user_id(), "ping-pong", msg.content(), null, null, null,null));
+        messageService.send_to_service(new MessageToService(msg.social(), msg.user_id(), "ping-pong", msg.content(), null, null, null, null));
     }
+
     @RabbitListener(queues = "${app.rabbitmq.from_service_queue}")
     public void receiveMessageFromService(String message) {
         MessageFromService msg = objectMapper.convertValue(message, MessageFromService.class);
         System.out.println("Received message from service: " + msg);
         messageService.send_to_bots(new MessageToBots(msg.social(), msg.user_id(), msg.content()));
     }
+
     @Value("${templates.some_string_value}")
     private String someStringValue;
+
     @PostConstruct
-    private void startPingPong(){
+    private void startPingPong() {
         System.out.println("Ping-pong started");
-        messageService.send_to_service(new MessageToService("telegram", "some_user", "ping-pong",someStringValue , null, null, null,null));
+        messageService.send_to_service(new MessageToService("telegram", "some_user", "ping-pong", someStringValue, null, null, null, null));
     }
 }

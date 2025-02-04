@@ -14,6 +14,7 @@ services:
   postgres:
     image: postgres:latest
     restart: always
+    hostname: postgres
     environment:
       POSTGRES_DB: "pdb"
       POSTGRES_USER: "pguser"
@@ -23,3 +24,13 @@ services:
       - 5433:5432
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+  bot_handler:
+    build:
+      context: /BotHandler/
+      dockerfile: Dockerfile
+    image: bothandler
+    restart: always
+    depends_on:
+      - postgres
+      - rabbitmq
+    env_file: "vars.env"

@@ -21,35 +21,54 @@ services:
   bot_handler:
     build:
       context: /BotHandler/
-      dockerfile: Dockerfile
-    image: bothandler
+      dockerfile: Dockerfile-inner
+    image: bothandler_inner
     restart: always
     env_file: "vars_spring.env.example"
     develop:
       watch:
-        - path: BotHandler/build/libs/BotHandler-0.0.1-SNAPSHOT.jar
+        - path: BotHandler/src
+          action: rebuild
+        - path: BotHandler/build.gradle.kts
+          action: rebuild
+        - path: BotHandler/settings.gradle.kts
+          action: rebuild
+        - path: BotHandler/Dockerfile
           action: rebuild
   service:
     build:
       context: /Service/
-      dockerfile: Dockerfile
-    image: service
+      dockerfile: Dockerfile-inner
+    image: service_inner
     restart: always
     env_file: "vars_spring.env.example"
     ports:
       - 8080:8080
     develop:
       watch:
-        - path: Service/build/libs/TelegramBot-0.0.1-SNAPSHOT.jar
+        - path: Service/src
+          action: rebuild
+        - path: Service/build.gradle.kts
+          action: rebuild
+        - path: Service/settings.gradle.kts
+          action: rebuild
+        - path: Service/Dockerfile
           action: rebuild
   telegram:
     build:
       context: /Bots/TelegramBot
-      dockerfile: Dockerfile
-    image: telegram_bot
+      dockerfile: Dockerfile-inner
+    image: telegram_bot_inner
     restart: always
     env_file: "vars_spring.env.example"
     develop:
       watch:
-        - path: Bots/TelegramBot/build/libs/Service-0.0.1-SNAPSHOT
+        - path: Bots/TelegramBot/src
           action: rebuild
+        - path: Bots/TelegramBot/build.gradle.kts
+          action: rebuild
+        - path: Bots/TelegramBot/settings.gradle.kts
+          action: rebuild
+        - path: Bots/TelegramBot/Dockerfile
+          action: rebuild
+   

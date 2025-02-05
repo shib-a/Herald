@@ -37,3 +37,9 @@ out/
 .vscode/
 
 *.env
+
+###Rabbit messages###
+/rabbitmq-data/
+
+###PostgreSQL###
+/postgres-data/

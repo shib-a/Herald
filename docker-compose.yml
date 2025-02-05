@@ -27,13 +27,7 @@ services:
     env_file: "vars_spring.env.example"
     develop:
       watch:
-        - path: BotHandler/src
-          action: rebuild
-        - path: BotHandler/build.gradle.kts
-          action: rebuild
-        - path: BotHandler/settings.gradle.kts
-          action: rebuild
-        - path: BotHandler/Dockerfile
+        - path: BotHandler/build/libs/BotHandler-0.0.1-SNAPSHOT.jar
           action: rebuild
   service:
     build:
@@ -46,12 +40,16 @@ services:
       - 8080:8080
     develop:
       watch:
-        - path: Service/src
+        - path: Service/build/libs/TelegramBot-0.0.1-SNAPSHOT.jar
           action: rebuild
-        - path: Service/build.gradle.kts
+  telegram:
+    build:
+      context: /Bots/TelegramBot
+      dockerfile: Dockerfile
+    image: telegram_bot
+    restart: always
+    env_file: "vars_spring.env.example"
+    develop:
+      watch:
+        - path: Bots/TelegramBot/build/libs/Service-0.0.1-SNAPSHOT
           action: rebuild
-        - path: Service/settings.gradle.kts
-          action: rebuild
-        - path: Service/Dockerfile
-          action: rebuild
-   

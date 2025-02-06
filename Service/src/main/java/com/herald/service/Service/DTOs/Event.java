@@ -1,17 +1,12 @@
-package com.herald.service.Service.Entities;
+package com.herald.service.Service.DTOs;
 
+import com.herald.service.Service.Entities.EventType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -38,7 +33,7 @@ public class Event {
     @Column(nullable = false)
     private boolean is_over = false;
     @ManyToMany(mappedBy = "events")
-    private Set<Account> accounts;
+    private Set<AccountDto> accounts;
     @ManyToMany(mappedBy = "events")
     private Set<Organizer> organizers;
 }

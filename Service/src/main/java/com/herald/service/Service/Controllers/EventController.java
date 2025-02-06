@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
-    @PostMapping("/add")
-    public ResponseEntity<EventDto>
+
 }

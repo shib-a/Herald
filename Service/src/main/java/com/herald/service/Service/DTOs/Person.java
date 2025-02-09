@@ -1,16 +1,10 @@
-package com.herald.service.Service.Entities;
+package com.herald.service.Service.DTOs;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -18,7 +12,7 @@ public class Person {
     @Column(nullable = false)
     private String fullname;
     @OneToMany(mappedBy = "person")
-    private Set<Account> account;
+    private Set<AccountDto> account;
     @OneToMany(mappedBy = "person")
     private Set<Organizer> organizers;
 }

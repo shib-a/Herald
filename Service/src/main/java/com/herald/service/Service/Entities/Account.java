@@ -1,11 +1,17 @@
 package com.herald.service.Service.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -26,7 +26,7 @@ public class Organizer {
     private OrganizationType organizationType;
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person;
+    private PersonDTO person;
 
     @ManyToMany
     @JoinTable(

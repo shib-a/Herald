@@ -24,4 +24,5 @@ public class AccountController {
         AccountDto responseDto = accountService.addAccount(accountDto);
         return ResponseEntity.ok(responseDto);
     }
+
 }

@@ -38,4 +38,5 @@ public class Account {
     private Set<Event> events;
     @ManyToMany
     private Set<Organizer> organizers;
+    private String password;
 }

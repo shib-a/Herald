@@ -1,5 +1,6 @@
-package com.herald.service.Service.DTOs;
+package com.herald.service.Service.DTOs.mappers;
 
+import com.herald.service.Service.DTOs.PersonDTO;
 import com.herald.service.Service.Entities.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

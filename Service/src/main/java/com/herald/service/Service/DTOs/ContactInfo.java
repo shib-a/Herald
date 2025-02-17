@@ -17,5 +17,5 @@ public class ContactInfo {
     @Column(nullable = false, length = 15)
     private String number;
     @ManyToOne
-    private Organizer organizer;
+    private OrganizerDTO organizer;
 }

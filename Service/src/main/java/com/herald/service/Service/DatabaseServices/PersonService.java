@@ -1,15 +1,12 @@
 package com.herald.service.Service.DatabaseServices;
 
 import com.herald.service.Service.DTOs.PersonDTO;
-import com.herald.service.Service.DTOs.PersonMapper;
+import com.herald.service.Service.DTOs.mappers.PersonMapper;
 import com.herald.service.Service.Entities.Person;
 import com.herald.service.Service.Repositories.PersonRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PersonService {

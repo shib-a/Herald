@@ -1,7 +1,7 @@
 package com.herald.service.Service.DatabaseServices;
 
 import com.herald.service.Service.DTOs.AccountDto;
-import com.herald.service.Service.DTOs.AccountMapper;
+import com.herald.service.Service.DTOs.mappers.AccountMapper;
 import com.herald.service.Service.Entities.Account;
 import com.herald.service.Service.Repositories.AccountRepository;
 import jakarta.transaction.Transactional;
